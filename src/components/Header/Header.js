@@ -46,7 +46,7 @@ class Header extends Component {
             Spaced repetition
           </Link>
         </h1>
-        {TokenService.hasAuthToken()
+                {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
       </header>
