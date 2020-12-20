@@ -10,8 +10,15 @@ body {
   font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(to right bottom, #000000, #331019, #620f24, #920728, #c20023, #d82e1e, #ed4c15, #ff6800, #ff9000, #ffb600, #ffdb00, #fbff00);
+height: 100%;
+color: white;
+
 }
 
 :root {
   --font-size: calc(10px + 1vmin);
+}
+a{
+  color: white;
 }

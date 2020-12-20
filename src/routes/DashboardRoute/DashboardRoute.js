@@ -2,16 +2,15 @@ import config from '../../config';
 
 import React, { Component } from 'react';
 import TokenService from '../../services/token-service';
-
+import DataContext from '../../contexts/DataContext';
+import UserContext from '../../contexts/UserContext';
+import { Wrapper } from '../../StyledComponents';
 
 class DashboardRoute extends Component {
-  state = {
-    language: '',
-    total_score: 0,
-    words: [],
-  };
+  static contextType = UserContext;
 
   componentDidMount() {
+    console.log('fetch mount');
     fetch(`${config.API_ENDPOINT}/language`, {
       headers: {
         'content-type': 'application/json',
@@ -20,34 +19,52 @@ class DashboardRoute extends Component {
     }).then((res) =>
       !res.ok
         ? res.json().then((e) => Promise.reject(e))
-        : res
-            .json()
-            .then((data) =>
-              this.setState({
-                language: data.language.name,
-                total_score: data.language.total_score,
-                words: data.words,
-              })
-            )
+        : res.json().then((data) => {
+            console.log('data from fetch,', data);
+            this.context.setLanguage(data.language.name);
+            this.context.setWords(data.words);
+            this.context.setTotalScore(data.language.total_score);
+            // this.props.setScore(data.language.total_score);
+            // this.props.setLang(data.language.name);
+            // this.props.setWords(data.words);
+          })
     );
   }
-
+  renderWords() {
+    return this.context.words.map((word, i) => (
+      <li>
+        <h4>{word.original}</h4>{' '}
+        <span>
+          correct answer count: {word.correct_count}</span><span> incorrect answer
+          count: {word.incorrect_count}{' '}
+        </span>
+      </li>
+    ));
+  }
   render() {
-    let list = [];
-    let words = this.state.words.forEach((word) => {
-      console.log('word', word);
-     
-      list.push(<li><h4>{word.original}</h4> <span>correct answer count: {word.correct_count}, incorrect answer count: {word.incorrect_count} </span></li>);
-    });
-    console.log('words', list);
+    console.log('con', this.context);
+    // let list =;
+    // let words = this.context.words.forEach((word) => {
+    //   console.log('word', word);
+
+    //   list.push();
+    // });
+    // console.log('words', list);
     return (
-      <section>
-        <h2> {this.state.language}</h2>
-        <a href="/learn">Start practicing</a>
-        <h3>Words to practice</h3>
-        <ul>{list}</ul>
-        <p>Total correct answers: {this.state.total_score}</p>
-      </section>
+      <Wrapper>
+        {this.context.words === null ? (
+          <p> no words found</p>
+        ) : (
+          <>
+            <h2> {this.context.language}</h2>
+            <a href="/learn">Start practicing</a>
+            <h3>Words to practice</h3>
+            <ul>{this.renderWords()}</ul>
+            {console.log('score', this.context.total_score)}
+            <p>Total correct answers: {this.context.total_score}</p>
+          </>
+        )}
+      </Wrapper>
     );
   }
 }
