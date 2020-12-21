@@ -111,7 +111,6 @@ export class UserProvider extends Component {
   };
 
   setTotalScore = (score) => {
-    console.log('set score ran with ', score)
     this.setState({
       total_score: score,
     });

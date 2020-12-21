@@ -22,7 +22,6 @@ class LearningRoute extends Component {
   };
 
   handleNext() {
-    console.log('nxt ran')
     this.setState({
       isClicked: false,
       correct: this.state.response.wordCorrectCount,
@@ -39,7 +38,6 @@ class LearningRoute extends Component {
   }
 
   async componentDidMount() {
-    console.log('did mount ran')
     try {
       const response = await fetch(
         `${config.API_ENDPOINT}/language/head`,
@@ -50,7 +48,6 @@ class LearningRoute extends Component {
         }
       );
       const json = await response.json();
-      console.log('comp mount json', json)
       this.context.setNextWord(json)
       this.setState({nextWord: json})
       this.setState({
@@ -68,7 +65,6 @@ class LearningRoute extends Component {
 
   async submitForm(e) {
     e.preventDefault();
-    console.log(e.target.guess.value);
     const guess = e.target.guess.value.toLowerCase().trim();
     e.target.guess.value = ''
     this.setState({guess: guess})
@@ -87,7 +83,6 @@ class LearningRoute extends Component {
         }
       );
       const json = await res.json();
-      console.log('sub json', json);
       this.context.setResponse(json);
       this.setState({
         response: json,
@@ -98,7 +93,6 @@ class LearningRoute extends Component {
     } catch (e) {
       this.setState({ error: e });
     }
-    // this.context.setTotalScore(this.context.response.totalScore);
     if (this.state.response.isCorrect) {
       this.setState({
         answer: 'correct',

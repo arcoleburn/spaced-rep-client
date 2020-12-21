@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm'
-import { Wrapper } from '../../StyledComponents'
+import RegistrationForm from '../../../components/RegistrationForm/RegistrationForm'
+import { Wrapper } from '../../../StyledComponents'
 
 class RegistrationRoute extends Component {
   static defaultProps = {

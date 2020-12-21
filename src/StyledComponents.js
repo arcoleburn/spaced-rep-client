@@ -33,6 +33,10 @@ const LearningSection = styled.section`
   .word{
     text-align: center;
   }
+  fieldset{
+    display: flex;
+    flex-direction: column;
+  }
 
 `
 

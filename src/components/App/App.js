@@ -19,22 +19,6 @@ export default class App extends Component {
     console.error(error);
     return { hasError: true };
   }
-
-  // setData(data){
-  //   this.setState()
-  // }
-  // setLang(lang) {
-  //   console.log('setlang ran with', lang)
-  //   this.setState({ language: lang });
-  // }
-  // setScore(score) {
-  //   console.log('setScore rand with', score)
-  //   this.setState({ total_score: score });
-  // }
-  // setWords(wrds) {
-  //   console.log('setwrds ran with,', wrds)
-  //   this.setState({ words: wrds });
-  // }
   render() {
     const { hasError } = this.state;
     return (
@@ -49,11 +33,7 @@ export default class App extends Component {
               component={(props) => (
                 <DashboardRoute
                   {...props}
-                  // setData={this.setData}
-                  // setLang={this.setLang}
-                  // setScore={this.setScore}
-                  // setWords={this.setWords}
-                  // state={this.state}
+              
                 />
               )}
             />
