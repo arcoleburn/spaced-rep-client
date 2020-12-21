@@ -25,8 +25,8 @@ class LearningRoute extends Component {
     console.log('nxt ran')
     this.setState({
       isClicked: false,
-      correct: this.state.nextWord.wordCorrectCount,
-      incorrect: this.state.nextWord.wordIncorrectCount,
+      correct: this.state.response.wordCorrectCount,
+      incorrect: this.state.response.wordIncorrectCount,
       translation: '',
       answer: null,
       nextWord: {
@@ -39,6 +39,7 @@ class LearningRoute extends Component {
   }
 
   async componentDidMount() {
+    console.log('did mount ran')
     try {
       const response = await fetch(
         `${config.API_ENDPOINT}/language/head`,
@@ -97,8 +98,8 @@ class LearningRoute extends Component {
     } catch (e) {
       this.setState({ error: e });
     }
-    this.context.setTotalScore(this.context.response.totalScore);
-    if (this.context.response.isCorrect) {
+    // this.context.setTotalScore(this.context.response.totalScore);
+    if (this.state.response.isCorrect) {
       this.setState({
         answer: 'correct',
         correct: this.state.correct + 1,
